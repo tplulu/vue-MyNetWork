@@ -4,9 +4,9 @@ import router from "./router";
 export const useUserStore = defineStore("userStore" , {
     state : () => {
         return {
-            user : {},
+            post : [],
             connected : false,
-            pseudo :"hehe",
+            pseudo :"",
             id : 0,
             image :""
         }
@@ -16,12 +16,26 @@ export const useUserStore = defineStore("userStore" , {
             const reponsereq = await fetch(`http://localhost:3400/utilisateurs?email=${email}&password=${password}`)
             const data = await reponsereq.json();
             console.log(data.length)
-            console.log(data)
             if (data.length==1) {
                 this.connected=true
                 this.pseudo=data[0]['pseudo']
                 this.id=data[0]['id']
                 this.image=data[0]['urlImgProfil']
+                $cookies.set('session_connected', true)
+                $cookies.set('session_pseudo', data[0]['pseudo'])
+                $cookies.set('session_id', data[0]['id'])
+                $cookies.set('session_image', data[0]['urlImgProfil'])
+            }
+        },
+        get_cookie : async function() {
+            if ($cookies.isKey('session_id')) {
+                var cookies_pseudo = $cookies.get('session_pseudo')
+                var cookies_id = $cookies.get('session_id')
+                var cookies_image = $cookies.get('session_image')
+                this.connected=true
+                this.pseudo=cookies_pseudo
+                this.id=cookies_id
+                this.image=cookies_image
             }
         },
         create : async function({email, password, pseudo, image }){
@@ -76,7 +90,16 @@ export const useUserStore = defineStore("userStore" , {
             this.pseudo=""
             this.id=""
             this.image=""
-            console.log("deco")
+            $cookies.remove('session_connected')
+            $cookies.remove('session_pseudo')
+            $cookies.remove('session_id')
+            $cookies.remove('session_image')
+        },
+        load_accueil : async function() {
+            const reponsereq = await fetch(`http://localhost:3400/articles`)
+            const data = await reponsereq.json();
+            this.post = data;
+            console.log(this.post)
         },
         get : async function(){
             await fetch()

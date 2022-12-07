@@ -15,11 +15,14 @@
 
 <script>
     import {useUserStore} from "../userStore"
+    import router from "../router"; 
+    import { RouterLink } from "vue-router"
     export default {
         methods : {
             submit : function(){
                 const profil = {email : this.email , password : this.password }
                 this.userStore.authentification(profil); 
+                router.push("Home")
             }
         },
         data : () => {

@@ -11,10 +11,21 @@ library.add(faUserPlus)
 library.add(faSignIn)
 
 let userStore = useUserStore() ;
+//$cookies.set('session', 'coucou')
 
+var lecookie1 = $cookies.get('session_connected')
+var lecookie2 = $cookies.get('session_pseudo')
+var lecookie3 = $cookies.get('session_id')
+var lecookie4 = $cookies.get('session_image')
+
+$cookies.remove('session')
 </script>
 <template>
     <div class="bg-primary">
+        {{lecookie1}}
+        {{lecookie2}}
+        {{lecookie3}}
+        {{lecookie4}}
         <!-- <h1 v-if="(userStore.connected==true)" >{{ userStore.pseudo }}</h1> -->
         <nav class="navbar navbar-expand navbar-dark container">
             <RouterLink :to="{name : 'Home'}" class="navbar-brand">MyNetWork</RouterLink>
@@ -53,12 +64,17 @@ let userStore = useUserStore() ;
 <script>
     
     import {useUserStore} from "../userStore"
+
     export default {
         methods : {
             deco : function(){
                 this.userStore.deconnection();
                 router.push("Connection")
-            }
+            },
+        },
+        beforeMount(){
+            this.userStore.get_cookie()
+            this.userStore.load_accueil()
         },
         data : () => {
             return {
