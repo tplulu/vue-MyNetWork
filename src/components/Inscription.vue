@@ -66,12 +66,13 @@ let userStore = useUserStore() ;
                 }
                 else {
                     const profil2 = {email : this.email}
-                    this.userStore.mailused(profil2)
                     const profil3 = {pseudo : this.pseudo}
-                    this.userStore.pseudoused(profil3)
-            
-                    const profil = {email : this.email , password : this.password , pseudo : this.pseudo, image : this.image}
-                    this.userStore.create(profil); 
+                    if (this.userStore.mailused(profil2) && this.userStore.pseudoused(profil3)) {
+                        const profil = {email : this.email , password : this.password , pseudo : this.pseudo, image : this.image}
+                        this.userStore.create(profil); 
+                    }
+                    //this.userStore.isused(profil2,profil3)
+                    
                 }
             },
         },

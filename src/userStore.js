@@ -8,7 +8,8 @@ export const useUserStore = defineStore("userStore" , {
             connected : false,
             pseudo :"",
             id : 0,
-            image :""
+            image :"",
+            list_pp : []
         }
     },
     actions : {
@@ -62,11 +63,11 @@ export const useUserStore = defineStore("userStore" , {
                     title: 'Erreur',
                     text: "Le mail est déjà utilisé"
                 })
-                return true
+                return false
                 
             }
             else {
-                return false
+                return true
             }
         },
         pseudoused : async function({pseudo}){
@@ -78,11 +79,11 @@ export const useUserStore = defineStore("userStore" , {
                     title: 'Erreur',
                     text: "Le pseudo est déjà utilisé"
                 })
-                return true
+                return false
                 
             }
             else {
-                return false
+                return true
             }
         },
         deconnection : async function(){
@@ -99,7 +100,110 @@ export const useUserStore = defineStore("userStore" , {
             const reponsereq = await fetch(`http://localhost:3400/articles`)
             const data = await reponsereq.json();
             this.post = data;
-            console.log(this.post)
+            this.post.forEach(async (item,index) => {
+                const reponsereq2 = await fetch(`http://localhost:3400/utilisateurs?pseudo=${item.pseudo}`)
+                const data2 = await reponsereq2.json();
+                this.list_pp[item.pseudo] = data2[0]['urlImgProfil']
+            })
+            
+        },
+        new_post : async function({id_post, contenu, urlImgArticle, pseudo }){
+            if (urlImgArticle=='' ) {
+                urlImgArticle = "https://source.unsplash.com/random/1000x300"
+            }
+            console.log(contenu)
+            console.log(urlImgArticle)
+            console.log(pseudo)
+            const newPoste = { id : id_post, contenu : contenu, urlImgArticle : urlImgArticle, like : 0, pseudo : pseudo, as_voted : [], date :  Date.now(), commentaires : [] }
+            const options = {
+                method : "POST",
+                body : JSON.stringify(newPoste),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles" , options);
+            this.load_accueil()
+        },
+        new_comment : async function({id_comment, contenu, pseudo, date , idpost }){
+            const reponsereq = await fetch("http://localhost:3400/articles/"+idpost)
+            const data = await reponsereq.json();
+            var old_comment = data['commentaires']
+            var comment_add = { id :  Date.now(), contenu : contenu, pseudo : pseudo, date :  Date.now()}
+            old_comment.push(comment_add)
+            console.log(old_comment)
+            const newCOmment = { commentaires :old_comment }
+            const options = {
+                method : "PATCH",
+                body : JSON.stringify(newCOmment),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles/"+idpost, options);
+            this.load_accueil()
+        },
+        jaime : async function( idpost , pseudo){
+            const reponsereq = await fetch("http://localhost:3400/articles/"+idpost)
+            const data = await reponsereq.json();
+            var old_value = data['like']
+            var new_value = old_value+1
+            console.log(new_value)
+            const newjaime = { like : new_value }
+            const options = {
+                method : "PATCH",
+                body : JSON.stringify(newjaime),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles/"+idpost, options);
+            const reponsereq2 = await fetch("http://localhost:3400/articles/"+idpost)
+            const data2 = await reponsereq2.json();
+            var old_voted = data2['as_voted']
+            old_voted.push(pseudo)
+            const newvoted = { as_voted : old_voted }
+            const options2 = {
+                method : "PATCH",
+                body : JSON.stringify(newvoted),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles/"+idpost, options2);
+
+            this.load_accueil()
+        },
+        jaimeplu : async function( idpost , pseudo){
+            const reponsereq = await fetch("http://localhost:3400/articles/"+idpost)
+            const data = await reponsereq.json();
+            var old_value = data['like']
+            var new_value = old_value-1
+            console.log(new_value)
+            const newjaime = { like : new_value }
+            const options = {
+                method : "PATCH",
+                body : JSON.stringify(newjaime),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles/"+idpost, options);
+            const reponsereq2 = await fetch("http://localhost:3400/articles/"+idpost)
+            const data2 = await reponsereq2.json();
+            var old_voted = data2['as_voted']
+            old_voted.splice(old_voted.indexOf(pseudo), 1)
+            const newvoted = { as_voted : old_voted }
+            const options2 = {
+                method : "PATCH",
+                body : JSON.stringify(newvoted),
+                headers : {
+                    "content-type" : "application/json"
+                }
+            }
+            await fetch("http://localhost:3400/articles/"+idpost, options2);
+
+            this.load_accueil()
         },
         get : async function(){
             await fetch()

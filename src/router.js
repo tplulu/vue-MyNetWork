@@ -7,9 +7,10 @@ import Connection from "./components/Connection.vue";
 export const router = createRouter({
     history : createWebHistory(),
     routes : [
-        {path : "/" , name : "Home" , component: Home},
+        {path : "/Home" , name : "Home2" , component: Home},
         {path : "/Inscription" , name : "Inscription" , component: Inscription},
-        {path : "/Connection" , name : "Connection" , component: Connection}
+        {path : "/Connection" , name : "Connection" , component: Connection},
+        {path : "/" , name : "Home" , component: Home}
     ]
 })
 
