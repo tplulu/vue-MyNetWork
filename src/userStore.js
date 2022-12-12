@@ -16,7 +16,6 @@ export const useUserStore = defineStore("userStore" , {
         authentification : async function({email, password}){
             const reponsereq = await fetch(`http://localhost:3400/utilisateurs?email=${email}&password=${password}`)
             const data = await reponsereq.json();
-            console.log(data.length)
             if (data.length==1) {
                 this.connected=true
                 this.pseudo=data[0]['pseudo']
@@ -52,38 +51,45 @@ export const useUserStore = defineStore("userStore" , {
                 }
             }
             await fetch("http://localhost:3400/utilisateurs" , options);
+            Swal.fire({
+                icon: 'success',
+                title: 'Merci !',
+                text: "Le compte à bien été crée"
+            })
             router.push("Connection")
         },
-        mailused : async function({email}){
-            const reponsereq = await fetch(`http://localhost:3400/utilisateurs?email=${email}`)
+        used : async function({v_email}, {v_pseudo}, email, password, pseudo, image){
+            const reponsereq = await fetch(`http://localhost:3400/utilisateurs?pseudo=${v_pseudo}`)
             const data = await reponsereq.json();
-            if (data.length==1 && email !="") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erreur',
-                    text: "Le mail est déjà utilisé"
-                })
-                return false
-                
-            }
-            else {
-                return true
-            }
-        },
-        pseudoused : async function({pseudo}){
-            const reponsereq = await fetch(`http://localhost:3400/utilisateurs?pseudo=${pseudo}`)
-            const data = await reponsereq.json();
-            if (data.length==1 && pseudo !="") {
+            const reponsereq2 = await fetch(`http://localhost:3400/utilisateurs?email=${v_email}`)
+            const data2 = await reponsereq2.json();
+            if (data.length==1 && v_pseudo !="") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Erreur',
                     text: "Le pseudo est déjà utilisé"
                 })
-                return false
-                
+            }
+            else if (data2.length==1 && v_email !="") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: "Le mail est déjà utilisé"
+                })
             }
             else {
-                return true
+                Swal.mixin({
+                    toast: true,
+                    icon: 'success',
+                    title: 'Compte crée avec succès !',
+                    animation: false,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                })
+                var profil = {email : email , password : password , pseudo : pseudo, image : image}
+                this.create(profil)
             }
         },
         deconnection : async function(){
@@ -111,9 +117,6 @@ export const useUserStore = defineStore("userStore" , {
             if (urlImgArticle=='' ) {
                 urlImgArticle = "https://source.unsplash.com/random/1000x300"
             }
-            console.log(contenu)
-            console.log(urlImgArticle)
-            console.log(pseudo)
             const newPoste = { id : id_post, contenu : contenu, urlImgArticle : urlImgArticle, like : 0, pseudo : pseudo, as_voted : [], date :  Date.now(), commentaires : [] }
             const options = {
                 method : "POST",
@@ -131,7 +134,6 @@ export const useUserStore = defineStore("userStore" , {
             var old_comment = data['commentaires']
             var comment_add = { id :  Date.now(), contenu : contenu, pseudo : pseudo, date :  Date.now()}
             old_comment.push(comment_add)
-            console.log(old_comment)
             const newCOmment = { commentaires :old_comment }
             const options = {
                 method : "PATCH",
@@ -148,7 +150,6 @@ export const useUserStore = defineStore("userStore" , {
             const data = await reponsereq.json();
             var old_value = data['like']
             var new_value = old_value+1
-            console.log(new_value)
             const newjaime = { like : new_value }
             const options = {
                 method : "PATCH",
@@ -171,7 +172,6 @@ export const useUserStore = defineStore("userStore" , {
                 }
             }
             await fetch("http://localhost:3400/articles/"+idpost, options2);
-
             this.load_accueil()
         },
         jaimeplu : async function( idpost , pseudo){
@@ -179,7 +179,6 @@ export const useUserStore = defineStore("userStore" , {
             const data = await reponsereq.json();
             var old_value = data['like']
             var new_value = old_value-1
-            console.log(new_value)
             const newjaime = { like : new_value }
             const options = {
                 method : "PATCH",

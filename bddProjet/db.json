@@ -1,0 +1,198 @@
+{
+  "utilisateurs": [
+    {
+      "id": 1,
+      "pseudo": "Alain",
+      "email": "alain@yahoo.fr",
+      "password": "123456",
+      "urlImgProfil": "https://images2.alphacoders.com/221/221620.jpg"
+    },
+    {
+      "id": 2,
+      "pseudo": "Béatrice",
+      "email": "bea@yahoo.fr",
+      "password": "123456",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 1670194182319,
+      "pseudo": "haha",
+      "email": "haha@gmail",
+      "password": "keke",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 1670798914706,
+      "pseudo": "TPLulu",
+      "email": "tplulu@gmail",
+      "password": "azerty",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 1670885072733,
+      "pseudo": "tutu",
+      "email": "tutu@gmail",
+      "password": "azerty",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 1670886108426,
+      "pseudo": "Marine",
+      "email": "MArine@gmail",
+      "password": "coucou",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 1670886177205,
+      "pseudo": "Wassime",
+      "email": "wass@gmail",
+      "password": "coucou",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "contenu": "article 1 je parle de mon chien",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 5,
+      "pseudo": "Alain",
+      "as_voted": [
+        "hehe",
+        "Alain",
+        "Béatrice"
+      ],
+      "date": 1649277945051,
+      "commentaires": [
+        {
+          "id": 1,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        },
+        {
+          "id": 2,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        },
+        {
+          "id": 1670777818028,
+          "contenu": "allez",
+          "pseudo": "Alain",
+          "date": 1670777818028
+        },
+        {
+          "id": 1670780765670,
+          "contenu": "vasy",
+          "pseudo": "Alain",
+          "date": 1670780765670
+        },
+        {
+          "id": 1670885987581,
+          "contenu": "siuuuuuuu",
+          "pseudo": "Béatrice",
+          "date": 1670885987581
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "contenu": "article 2 je parle de mon chien",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 5,
+      "pseudo": "Alain",
+      "as_voted": [
+        "hehe",
+        "Alain",
+        "Alain",
+        "Alain",
+        "Béatrice"
+      ],
+      "date": 1649277945051,
+      "commentaires": [
+        {
+          "id": 1,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        },
+        {
+          "id": 2,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        }
+      ]
+    },
+    {
+      "contenu": "pitié ",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 10,
+      "pseudo": "Alain",
+      "as_voted": [],
+      "date": 1670688098016,
+      "commentaires": [],
+      "id": 4
+    },
+    {
+      "contenu": "par pitié marche",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 0,
+      "pseudo": "Alain",
+      "as_voted": [],
+      "date": 1670688556465,
+      "commentaires": [],
+      "id": 5
+    },
+    {
+      "contenu": "sdzsufvbsdzsufvbsdzsufvbsdzsufvb  sdzsufvb sdzsufvb  jVite + VueVite + Vue Vite + Vuesdsdsdzsufvbsdzsufvbsdzsufvbsdzsufvb  sdzsufvb sdzsufvb  jVite + VueVite + Vue Vite + Vuesdsdsdzsufvbsdzsufvbsdzsufvbsdzsufvb  sdzsufvb sdzsufvb  jVite + VueVite + Vue Vite + Vuesdsdsdzsufvbsdzsufvbsdzsufvbsdzsufvb  sdzsufvb sdzsufvb  jVite + VueVite + Vue Vite + Vuesdsd",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 0,
+      "pseudo": "Alain",
+      "as_voted": [],
+      "date": 1670689179081,
+      "commentaires": [],
+      "id": 6
+    },
+    {
+      "contenu": "sdzsufvbsdzsufvbsdzsufvbsdzsufvb  sdzsufvb sdzsufvb  jVite + VueVite + Vue Vite + Vuesdsd",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 0,
+      "pseudo": "Alain",
+      "as_voted": [],
+      "date": 1670689203006,
+      "commentaires": [],
+      "id": 7
+    },
+    {
+      "contenu": "bleach",
+      "urlImgArticle": "https://images2.alphacoders.com/100/1003282.jpg",
+      "like": 1,
+      "pseudo": "Alain",
+      "as_voted": [
+        "Alain"
+      ],
+      "date": 1670759541610,
+      "commentaires": [
+        {
+          "id": 1670777924013,
+          "contenu": "excellent commentaire",
+          "pseudo": "Alain",
+          "date": 1670777924013
+        }
+      ],
+      "id": 8
+    },
+    {
+      "contenu": "new post hehe",
+      "urlImgArticle": "https://source.unsplash.com/random/1000x300",
+      "like": 0,
+      "pseudo": "Alain",
+      "as_voted": [],
+      "date": 1670780987564,
+      "commentaires": [],
+      "id": 9
+    }
+  ]
+}

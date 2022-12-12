@@ -65,14 +65,10 @@ let userStore = useUserStore() ;
                     })
                 }
                 else {
-                    const profil2 = {email : this.email}
-                    const profil3 = {pseudo : this.pseudo}
-                    if (this.userStore.mailused(profil2) && this.userStore.pseudoused(profil3)) {
-                        const profil = {email : this.email , password : this.password , pseudo : this.pseudo, image : this.image}
-                        this.userStore.create(profil); 
-                    }
-                    //this.userStore.isused(profil2,profil3)
-                    
+                    const profil2 = {v_pseudo : this.email}
+                    const profil3 = {v_pseudo : this.pseudo}
+                    const profil = {email : this.email , password : this.password , pseudo : this.pseudo, image : this.image}
+                    this.userStore.used(profil2,profil3, this.email, this.password, this.pseudo ,this.image); 
                 }
             },
         },

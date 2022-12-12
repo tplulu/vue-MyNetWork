@@ -22,11 +22,6 @@ $cookies.remove('session')
 </script>
 <template>
     <div class="bg-primary">
-        {{lecookie1}}
-        {{lecookie2}}
-        {{lecookie3}}
-        {{lecookie4}}
-        <!-- <h1 v-if="(userStore.connected==true)" >{{ userStore.pseudo }}</h1> -->
         <nav class="navbar navbar-expand navbar-dark container">
             <RouterLink :to="{name : 'Home'}" class="navbar-brand">MyNetWork</RouterLink>
             <ul class="navbar-nav">

@@ -18,3 +18,5 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 -npm i --save @fortawesome/free-brands-svg-icons
 
 npm install vue-cookies --save
+
+Mettre la bdd dans un dossier en dehors du projet

@@ -42,8 +42,8 @@ library.add(faThumbsUp)
                 </div>
                 <div v-if="(userStore.connected==true)" class="card-footer">    
                     
-                    <button class="btn btn-secondary" v-if="(todo.as_voted.indexOf(todo.pseudo) === -1)" @click="userStore.jaime(todo.id,todo.pseudo)"> <FontAwesomeIcon icon='thumbs-up' /> {{ todo.like }} </button>
-                    <button class="btn btn-primary" v-if="(todo.as_voted.indexOf(todo.pseudo) !== -1)" @click="userStore.jaimeplu(todo.id,todo.pseudo)"> <FontAwesomeIcon icon='thumbs-up' /> {{ todo.like }} </button>
+                    <button class="btn btn-secondary" v-if="(todo.as_voted.indexOf(userStore.pseudo) === -1)" @click="userStore.jaime(todo.id,userStore.pseudo)"> <FontAwesomeIcon icon='thumbs-up' /> {{ todo.like }} {{todo.as_voted.indexOf(todo.pseudo) }} {{todo.pseudo}}</button>
+                    <button class="btn btn-primary" v-if="(todo.as_voted.indexOf(userStore.pseudo) !== -1)" @click="userStore.jaimeplu(todo.id,userStore.pseudo)"> <FontAwesomeIcon icon='thumbs-up' /> {{ todo.like }} </button>
                 </div>
                 <div v-if="(userStore.connected!=true)" class="card-footer">    
                     
